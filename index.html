@@ -442,6 +442,13 @@
     .taskbar-icon:hover { border-color: #FDB9C8; }
     .win-btn:hover { border-color: #FDB9C8; }
     .menu-item:hover { outline: 1px solid #FDB9C8; }
+
+    /* ── CLICK FLASH ────────────────────────────────────────── */
+    @keyframes borderFlash {
+      0%   { border-color: #FDB9C8; }
+      100% { border-color: inherit; }
+    }
+    .flash { animation: borderFlash 0.35s ease forwards; }
     /* ── SCROLLBARS ──────────────────────────────────────── */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #FFC1CC; border-left: 2px solid #000; }
@@ -751,6 +758,21 @@
   </div>
 
   <script>
+
+    /* ── CLICK FLASH ────────────────────────────────────────── */
+    (function() {
+      const FLASH_TARGETS = '.icon-img, .tab, .pill-link, .card, .taskbar-icon, .win-btn, .menu-item';
+      document.addEventListener('mousedown', function(e) {
+        const el = e.target.closest(FLASH_TARGETS);
+        if (!el) return;
+        el.classList.remove('flash');
+        // force reflow so animation restarts even on rapid clicks
+        void el.offsetWidth;
+        el.classList.add('flash');
+        el.addEventListener('animationend', () => el.classList.remove('flash'), { once: true });
+      });
+    })();
+
     /* ── BOOT SEQUENCE ─────────────────────────────────── */
     (function() {
       const bar = document.getElementById('bootBar');

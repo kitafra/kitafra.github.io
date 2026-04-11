@@ -910,7 +910,7 @@
       </div>
       <div class="win-body">
         <div class="cd-playlist-bar">
-          <input type="text" class="cd-playlist-input" id="cdPlaylistInput" placeholder="Paste YouTube playlist link..." />
+          <input type="text" class="cd-playlist-input" id="cdPlaylistInput" placeholder="Paste YouTube link or playlist..." />
           <button class="cd-load-btn" id="cdLoadBtn">LOAD</button>
         </div>
         <div class="cd-layout">
@@ -1317,15 +1317,27 @@
       setTimeout(updateTrackInfo, 1000);
     });
 
-    // Load custom playlist
-    function parseYouTubeList(url) {
+    // Parse YouTube URL — handles single videos and playlists
+    function parseYouTubeInput(url) {
+      var val = url.trim();
       try {
-        var u = new URL(url);
+        var u = new URL(val);
         var list = u.searchParams.get('list');
-        if (list) return list;
+        var v = u.searchParams.get('v');
+        // youtu.be short links
+        if (u.hostname === 'youtu.be') {
+          var vid = u.pathname.slice(1);
+          if (list) return { type: 'playlist', id: list };
+          if (vid) return { type: 'video', id: vid };
+        }
+        // Playlist link takes priority if present
+        if (list) return { type: 'playlist', id: list };
+        // Single video
+        if (v) return { type: 'video', id: v };
       } catch(e) {}
-      // try raw ID
-      if (url.trim().length > 5 && url.trim().indexOf(' ') === -1) return url.trim();
+      // Raw ID fallback (11 chars = video, longer = playlist)
+      if (val.length === 11 && val.indexOf(' ') === -1) return { type: 'video', id: val };
+      if (val.length > 11 && val.indexOf(' ') === -1) return { type: 'playlist', id: val };
       return null;
     }
 
@@ -1333,13 +1345,17 @@
       var input = document.getElementById('cdPlaylistInput');
       var val = input.value.trim();
       if (!val) return;
-      var listId = parseYouTubeList(val);
-      if (!listId) { input.value = 'Invalid link'; return; }
+      var parsed = parseYouTubeInput(val);
+      if (!parsed) { input.value = 'Invalid link'; return; }
       if (!ytPlayer || !ytReady) return;
-      ytPlayer.loadPlaylist({ list: listId, listType: 'playlist' });
+      if (parsed.type === 'playlist') {
+        ytPlayer.loadPlaylist({ list: parsed.id, listType: 'playlist' });
+      } else {
+        ytPlayer.loadVideoById(parsed.id);
+      }
       input.value = '';
-      input.placeholder = 'Playlist loaded!';
-      setTimeout(function() { input.placeholder = 'Paste YouTube playlist link...'; }, 3000);
+      input.placeholder = parsed.type === 'playlist' ? 'Playlist loaded!' : 'Video loaded!';
+      setTimeout(function() { input.placeholder = 'Paste YouTube link or playlist...'; }, 3000);
       setTimeout(updateTrackInfo, 1500);
     });
 

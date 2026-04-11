@@ -329,18 +329,7 @@
       top: 70px;
       left: 340px;
     }
-    #win-cd .win-bar {
-      background: linear-gradient(180deg, #C879D9 0%, #A855C4 100%);
-      color: #fff;
-    }
-    #win-cd .win-btn {
-      background: #E8B4F0;
-      border: 1px solid #C879D9;
-      color: #5B2370;
-    }
-    #win-cd .win-btn:hover { background: #fff; }
     #win-cd .win-body {
-      background: #F5C6E0;
       padding: 12px;
     }
     .cd-layout {
@@ -352,7 +341,7 @@
       width: 110px;
       height: 110px;
       border: 2px solid #000;
-      background: #E0F0E0;
+      background: #000;
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -371,8 +360,8 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      border: 3px solid #888;
-      background: radial-gradient(circle at 50% 50%, #333 18%, #666 20%, #888 22%, #aaa 40%, #ccc 50%, #aaa 60%, #888 78%, #666 80%, #333 82%);
+      border: 3px solid #FFC1CC;
+      background: radial-gradient(circle at 50% 50%, #1a1a1a 18%, #2a2a2a 20%, #333 22%, #444 40%, #555 50%, #444 60%, #333 78%, #2a2a2a 80%, #1a1a1a 82%);
     }
     .cd-info {
       flex: 1;
@@ -393,11 +382,11 @@
     .cd-field-value {
       flex: 1;
       height: 22px;
-      background: #F0F0E8;
-      border: 2px inset #C0C0C0;
+      background: #000;
+      border: 2px solid #000;
       font-family: 'Press Start 2P', monospace;
       font-size: 6px;
-      color: #333;
+      color: #FFC1CC;
       padding: 0 6px;
       display: flex;
       align-items: center;
@@ -407,11 +396,11 @@
     .cd-field-dd {
       width: 36px;
       height: 22px;
-      background: #E8B4F0;
-      border: 2px outset #C0C0C0;
+      background: #000;
+      border: 2px solid #000;
       font-family: 'Press Start 2P', monospace;
       font-size: 6px;
-      color: #5B2370;
+      color: #FFC1CC;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -428,7 +417,7 @@
     .cd-seek-track {
       flex: 1;
       height: 4px;
-      background: #888;
+      background: #000;
       position: relative;
     }
     .cd-seek-thumb {
@@ -437,8 +426,8 @@
       left: 10%;
       width: 12px;
       height: 14px;
-      background: #E8B4F0;
-      border: 2px outset #C0C0C0;
+      background: #FFC1CC;
+      border: 2px solid #000;
     }
     .cd-controls {
       display: flex;
@@ -448,18 +437,19 @@
     .cd-btn {
       width: 42px;
       height: 34px;
-      background: #E8B4F0;
-      border: 2px outset #C0C0C0;
+      background: #FFC1CC;
+      border: 2px solid #000;
       font-family: 'Press Start 2P', monospace;
       font-size: 10px;
-      color: #5B2370;
+      color: #000;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: background 80ms, color 80ms;
     }
-    .cd-btn:hover { background: #F0CCF8; }
-    .cd-btn:active { border-style: inset; }
+    .cd-btn:hover { background: #000; color: #FFC1CC; }
+    .cd-btn:active { background: #000; color: #FFC1CC; }
     .cd-yt-frame {
       width: 1px;
       height: 1px;
@@ -475,33 +465,34 @@
     .cd-playlist-input {
       flex: 1;
       height: 24px;
-      background: #F0F0E8;
-      border: 2px inset #C0C0C0;
+      background: #000;
+      border: 2px solid #000;
       font-family: 'Press Start 2P', monospace;
       font-size: 5px;
-      color: #333;
+      color: #FFC1CC;
       padding: 0 6px;
       outline: none;
     }
     .cd-playlist-input::placeholder {
-      color: #999;
+      color: rgba(255,193,204,0.5);
       font-size: 5px;
     }
     .cd-load-btn {
       height: 24px;
       padding: 0 8px;
-      background: #E8B4F0;
-      border: 2px outset #C0C0C0;
+      background: #000;
+      border: 2px solid #000;
       font-family: 'Press Start 2P', monospace;
       font-size: 5px;
-      color: #5B2370;
+      color: #FFC1CC;
       cursor: pointer;
       white-space: nowrap;
       display: flex;
       align-items: center;
+      transition: background 80ms, color 80ms;
     }
-    .cd-load-btn:hover { background: #F0CCF8; }
-    .cd-load-btn:active { border-style: inset; }
+    .cd-load-btn:hover { background: #FFC1CC; color: #000; }
+    .cd-load-btn:active { background: #FFC1CC; color: #000; }
 
     /* ── PIXEL CURSOR ────────────────────────────────────── */
     #desktop, .icon, .win-bar, .tab, .pill-link, .card, .win-btn, .taskbar-icon {

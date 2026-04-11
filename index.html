@@ -323,6 +323,158 @@
       line-height: 1.8;
     }
 
+    /* ── WINDOW: CD PLAYER ────────────────────────────────── */
+    #win-cd {
+      width: 440px;
+      top: 70px;
+      left: 340px;
+    }
+    #win-cd .win-bar {
+      background: linear-gradient(180deg, #C879D9 0%, #A855C4 100%);
+      color: #fff;
+    }
+    #win-cd .win-btn {
+      background: #E8B4F0;
+      border: 1px solid #C879D9;
+      color: #5B2370;
+    }
+    #win-cd .win-btn:hover { background: #fff; }
+    #win-cd .win-body {
+      background: #F5C6E0;
+      padding: 12px;
+    }
+    .cd-layout {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cd-art {
+      width: 110px;
+      height: 110px;
+      border: 2px solid #000;
+      background: #E0F0E0;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cd-disc {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #888;
+      background: radial-gradient(circle at 50% 50%, #333 18%, #666 20%, #888 22%, #aaa 40%, #ccc 50%, #aaa 60%, #888 78%, #666 80%, #333 82%);
+      animation: spin 3s linear infinite;
+      animation-play-state: paused;
+    }
+    .cd-disc.spinning { animation-play-state: running; }
+    .cd-disc::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #333;
+      border: 2px solid #555;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .cd-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cd-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cd-field-label {
+      font-size: 7px;
+      color: #000;
+      flex-shrink: 0;
+    }
+    .cd-field-value {
+      flex: 1;
+      height: 22px;
+      background: #F0F0E8;
+      border: 2px inset #C0C0C0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #333;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .cd-field-dd {
+      width: 36px;
+      height: 22px;
+      background: #E8B4F0;
+      border: 2px outset #C0C0C0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #5B2370;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cd-seekbar {
+      width: 100%;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+    .cd-seek-track {
+      flex: 1;
+      height: 4px;
+      background: #888;
+      position: relative;
+    }
+    .cd-seek-thumb {
+      position: absolute;
+      top: -5px;
+      left: 10%;
+      width: 12px;
+      height: 14px;
+      background: #E8B4F0;
+      border: 2px outset #C0C0C0;
+    }
+    .cd-controls {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+    .cd-btn {
+      width: 42px;
+      height: 34px;
+      background: #E8B4F0;
+      border: 2px outset #C0C0C0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: #5B2370;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .cd-btn:hover { background: #F0CCF8; }
+    .cd-btn:active { border-style: inset; }
+    .cd-yt-frame {
+      width: 1px;
+      height: 1px;
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+    }
+
     /* ── PIXEL CURSOR ────────────────────────────────────── */
     #desktop, .icon, .win-bar, .tab, .pill-link, .card, .win-btn, .taskbar-icon {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 0h2v2H0zM2 2h2v2H2zM4 4h2v2H4zM6 6h2v2H6zM2 4h2v2H2zM4 8h2v2H4zM2 10h2v2H2zM4 12h2v2H4z' fill='%23000'/%3E%3Cpath d='M1 0h1v2H1zM0 0h1v1H0zM3 2h1v2H3zM2 2h1v1H2zM5 4h1v2H5zM4 4h1v1H4zM7 6h1v2H7zM6 6h1v1H6z' fill='%23FFC1CC'/%3E%3C/svg%3E") 0 0, pointer;
@@ -552,6 +704,17 @@
         <div class="icon-label">ABOUT</div>
       </div>
 
+      <div class="icon" data-win="win-cd" onclick="openWin('win-cd')">
+        <div class="icon-img">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="11" stroke="#000" stroke-width="2" fill="none"/>
+            <circle cx="14" cy="14" r="4" stroke="#000" stroke-width="2" fill="none"/>
+            <circle cx="14" cy="14" r="1.5" fill="#000"/>
+          </svg>
+        </div>
+        <div class="icon-label">CD PLAYER</div>
+      </div>
+
       <div class="icon" onclick="window.open('https://www.tiktok.com/@kitafra','_blank')">
         <div class="icon-img">
           <svg viewBox="0 0 28 28" fill="#000" xmlns="http://www.w3.org/2000/svg">
@@ -717,6 +880,48 @@
       </div>
     </div>
 
+    <!-- ── WIN: CD PLAYER ──────────────────────────────── -->
+    <div class="win" id="win-cd">
+      <div class="win-bar" onmousedown="startDrag(event,'win-cd')">
+        <span class="win-title">💿 CD Player</span>
+        <div class="win-controls">
+          <button class="win-btn" onclick="minimizeWin('win-cd')" title="Minimize">_</button>
+          <button class="win-btn" onclick="closeWin('win-cd')" title="Close">×</button>
+        </div>
+      </div>
+      <div class="win-body">
+        <div class="cd-layout">
+          <div class="cd-art">
+            <div class="cd-disc" id="cdDisc"></div>
+          </div>
+          <div class="cd-info">
+            <div class="cd-field">
+              <span class="cd-field-label">Artist</span>
+              <div class="cd-field-value" id="cdArtist">Loading...</div>
+              <div class="cd-field-dd">〈D:〉</div>
+            </div>
+            <div class="cd-field">
+              <span class="cd-field-label">Track</span>
+              <div class="cd-field-value" id="cdTrack">Loading...</div>
+              <div class="cd-field-dd">〈D:〉</div>
+            </div>
+          </div>
+        </div>
+        <div class="cd-seekbar">
+          <div class="cd-seek-track">
+            <div class="cd-seek-thumb" id="cdThumb"></div>
+          </div>
+        </div>
+        <div class="cd-controls">
+          <button class="cd-btn" id="cdPrev" title="Previous">◀◀</button>
+          <button class="cd-btn" id="cdNext" title="Next">▶▶</button>
+          <button class="cd-btn" id="cdPlay" title="Play">▶</button>
+          <button class="cd-btn" id="cdStop" title="Stop">■</button>
+        </div>
+      </div>
+      <div id="yt-container"></div>
+    </div>
+
   </div><!-- /desktop -->
 
   <!-- ── TASKBAR ───────────────────────────────────────── -->
@@ -731,6 +936,9 @@
       </button>
       <button class="taskbar-icon" id="tb-win-about" onclick="taskbarClick('win-about')">
         <div class="taskbar-dot"></div>ABOUT
+      </button>
+      <button class="taskbar-icon" id="tb-win-cd" onclick="taskbarClick('win-cd')">
+        <div class="taskbar-dot"></div>CD PLAYER
       </button>
     </div>
     <div id="clock">00:00</div>
@@ -750,6 +958,10 @@
     <div class="menu-item" onclick="openWin('win-about');closeStartMenu()">
       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="12"/><rect x="4" y="4" width="6" height="1.5" fill="currentColor" stroke="none"/><rect x="4" y="7" width="6" height="1.5" fill="currentColor" stroke="none"/><rect x="4" y="10" width="4" height="1.5" fill="currentColor" stroke="none"/></svg>
       ABOUT
+    </div>
+    <div class="menu-item" onclick="openWin('win-cd');closeStartMenu()">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><circle cx="7" cy="7" r="2"/></svg>
+      CD PLAYER
     </div>
     <div class="menu-item" onclick="window.open('https://www.tiktok.com/@kitafra','_blank');closeStartMenu()">
       <svg viewBox="0 0 14 14" fill="currentColor"><path d="M10 2.5a2.5 2.5 0 01-2.5-2.5H6V9a1.5 1.5 0 11-1.5-1.5v-2A3.5 3.5 0 1010 9V2.5z"/></svg>
@@ -825,6 +1037,7 @@
           'win-main':    { top: 60,  left: 120 },
           'win-content': { top: 80,  left: 220 },
           'win-about':   { top: 100, left: 460 },
+          'win-cd':      { top: 70,  left: 340 },
         };
         if (positions[id] && !el.style.top) {
           el.style.top  = positions[id].top  + 'px';
@@ -876,7 +1089,7 @@
     }
 
     function updateTaskbar() {
-      ['win-main','win-content','win-about'].forEach(id => {
+      ['win-main','win-content','win-about','win-cd'].forEach(id => {
         const tb = document.getElementById('tb-' + id);
         if (!tb) return;
         const isOpen = winState[id] === 'open' || winState[id] === 'minimized';
@@ -952,6 +1165,128 @@
       if (!e.target.closest('#start-menu') && !e.target.closest('#start-btn')) {
         closeStartMenu();
       }
+    });
+    /* ── YOUTUBE IFRAME API + CD PLAYER ─────────────── */
+    var ytPlayer = null;
+    var ytReady = false;
+
+    // Load YouTube IFrame API
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('yt-container', {
+        height: '1',
+        width: '1',
+        playerVars: {
+          listType: 'playlist',
+          list: 'RDN6IaHiLN34c',
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          rel: 0
+        },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      ytReady = true;
+      updateTrackInfo();
+    }
+
+    function onPlayerStateChange(event) {
+      var disc = document.getElementById('cdDisc');
+      var playBtn = document.getElementById('cdPlay');
+      if (event.data === YT.PlayerState.PLAYING) {
+        disc.classList.add('spinning');
+        playBtn.textContent = '❚❚';
+        updateTrackInfo();
+        startSeekUpdate();
+      } else if (event.data === YT.PlayerState.PAUSED) {
+        disc.classList.remove('spinning');
+        playBtn.textContent = '▶';
+        stopSeekUpdate();
+      } else if (event.data === YT.PlayerState.ENDED) {
+        disc.classList.remove('spinning');
+        playBtn.textContent = '▶';
+        stopSeekUpdate();
+      }
+      if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.PAUSED) {
+        updateTrackInfo();
+      }
+    }
+
+    function updateTrackInfo() {
+      if (!ytPlayer || !ytReady) return;
+      try {
+        var data = ytPlayer.getVideoData();
+        var title = data.title || 'Unknown';
+        var author = data.author || 'Unknown';
+        document.getElementById('cdArtist').textContent = author;
+        document.getElementById('cdTrack').textContent = title;
+      } catch(e) {
+        document.getElementById('cdArtist').textContent = 'YouTube Mix';
+        document.getElementById('cdTrack').textContent = 'Radio';
+      }
+    }
+
+    var seekInterval = null;
+    function startSeekUpdate() {
+      stopSeekUpdate();
+      seekInterval = setInterval(function() {
+        if (!ytPlayer || !ytReady) return;
+        try {
+          var curr = ytPlayer.getCurrentTime();
+          var dur = ytPlayer.getDuration();
+          if (dur > 0) {
+            var pct = (curr / dur) * 100;
+            document.getElementById('cdThumb').style.left = pct + '%';
+          }
+        } catch(e) {}
+      }, 500);
+    }
+    function stopSeekUpdate() {
+      if (seekInterval) { clearInterval(seekInterval); seekInterval = null; }
+    }
+
+    // Button handlers
+    document.getElementById('cdPlay').addEventListener('click', function() {
+      if (!ytPlayer || !ytReady) return;
+      var state = ytPlayer.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) {
+        ytPlayer.pauseVideo();
+      } else {
+        ytPlayer.playVideo();
+      }
+    });
+
+    document.getElementById('cdStop').addEventListener('click', function() {
+      if (!ytPlayer || !ytReady) return;
+      ytPlayer.stopVideo();
+      document.getElementById('cdDisc').classList.remove('spinning');
+      document.getElementById('cdPlay').textContent = '▶';
+      document.getElementById('cdThumb').style.left = '0%';
+      stopSeekUpdate();
+    });
+
+    document.getElementById('cdPrev').addEventListener('click', function() {
+      if (!ytPlayer || !ytReady) return;
+      ytPlayer.previousVideo();
+      setTimeout(updateTrackInfo, 1000);
+    });
+
+    document.getElementById('cdNext').addEventListener('click', function() {
+      if (!ytPlayer || !ytReady) return;
+      ytPlayer.nextVideo();
+      setTimeout(updateTrackInfo, 1000);
     });
   </script>
 </body>

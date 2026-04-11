@@ -494,6 +494,143 @@
     .cd-load-btn:hover { background: #FFC1CC; color: #000; }
     .cd-load-btn:active { background: #FFC1CC; color: #000; }
 
+    /* ── WINDOW: VIDEO PLAYER ────────────────────────────── */
+    #win-video {
+      width: 480px;
+      top: 50px;
+      left: 280px;
+    }
+    #win-video .win-body {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .vp-menubar {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #000;
+      background: #FFC1CC;
+    }
+    .vp-menu-item {
+      font-size: 6px;
+      padding: 5px 8px;
+      cursor: pointer;
+      border-right: 1px solid rgba(0,0,0,0.15);
+      color: #000;
+    }
+    .vp-menu-item:hover { background: #000; color: #FFC1CC; }
+    .vp-screen {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      position: relative;
+    }
+    .vp-screen iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .vp-status {
+      font-size: 6px;
+      padding: 4px 8px;
+      background: #FFC1CC;
+      border-top: 1px solid rgba(0,0,0,0.2);
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      color: #000;
+      opacity: 0.6;
+    }
+    .vp-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      background: #FFC1CC;
+    }
+    .vp-seek {
+      flex: 1;
+      height: 4px;
+      background: #000;
+      position: relative;
+    }
+    .vp-seek-fill {
+      height: 100%;
+      width: 0%;
+      background: #FFC1CC;
+    }
+    .vp-btn {
+      width: 28px;
+      height: 28px;
+      background: #FFC1CC;
+      border: 2px solid #000;
+      font-size: 10px;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 80ms, color 80ms;
+      font-family: 'Press Start 2P', monospace;
+    }
+    .vp-btn:hover { background: #000; color: #FFC1CC; }
+    .vp-volume {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .vp-vol-bar {
+      width: 50px;
+      height: 4px;
+      background: #000;
+      position: relative;
+    }
+    .vp-vol-fill {
+      height: 100%;
+      width: 70%;
+      background: #FFC1CC;
+    }
+    .vp-vol-icon {
+      font-size: 8px;
+      color: #000;
+    }
+    .vp-url-bar {
+      display: flex;
+      gap: 4px;
+      padding: 6px 10px;
+      background: #FFC1CC;
+      border-top: 2px solid #000;
+    }
+    .vp-url-input {
+      flex: 1;
+      height: 24px;
+      background: #000;
+      border: 2px solid #000;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #FFC1CC;
+      padding: 0 6px;
+      outline: none;
+    }
+    .vp-url-input::placeholder {
+      color: rgba(255,193,204,0.5);
+      font-size: 5px;
+    }
+    .vp-url-btn {
+      height: 24px;
+      padding: 0 8px;
+      background: #000;
+      border: 2px solid #000;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #FFC1CC;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      transition: background 80ms, color 80ms;
+    }
+    .vp-url-btn:hover { background: #FFC1CC; color: #000; }
+
     /* ── PIXEL CURSOR ────────────────────────────────────── */
     #desktop, .icon, .win-bar, .tab, .pill-link, .card, .win-btn, .taskbar-icon {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 0h2v2H0zM2 2h2v2H2zM4 4h2v2H4zM6 6h2v2H6zM2 4h2v2H2zM4 8h2v2H4zM2 10h2v2H2zM4 12h2v2H4z' fill='%23000'/%3E%3Cpath d='M1 0h1v2H1zM0 0h1v1H0zM3 2h1v2H3zM2 2h1v1H2zM5 4h1v2H5zM4 4h1v1H4zM7 6h1v2H7zM6 6h1v1H6z' fill='%23FFC1CC'/%3E%3C/svg%3E") 0 0, pointer;
@@ -745,6 +882,28 @@
         <div class="icon-label">ABOUT</div>
       </div>
 
+      <div class="icon" data-win="win-video" onclick="openWin('win-video')">
+        <div class="icon-img">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <!-- TV/Monitor -->
+            <rect x="3" y="3" width="26" height="20" fill="#C0C0C0" stroke="#000" stroke-width="1"/>
+            <rect x="5" y="5" width="22" height="15" fill="#000"/>
+            <!-- Play button on screen -->
+            <polygon points="13,9 13,17 21,13" fill="#FFC1CC"/>
+            <!-- Antenna -->
+            <line x1="12" y1="3" x2="8" y2="0" stroke="#000" stroke-width="1.5"/>
+            <line x1="20" y1="3" x2="24" y2="0" stroke="#000" stroke-width="1.5"/>
+            <!-- Base -->
+            <rect x="10" y="23" width="12" height="2" fill="#808080" stroke="#000" stroke-width="1"/>
+            <rect x="7" y="25" width="18" height="3" fill="#C0C0C0" stroke="#000" stroke-width="1"/>
+            <!-- Knobs -->
+            <circle cx="27" cy="8" r="1.5" fill="#808080"/>
+            <circle cx="27" cy="13" r="1.5" fill="#808080"/>
+          </svg>
+        </div>
+        <div class="icon-label">VIDEO</div>
+      </div>
+
       <div class="icon" data-win="win-cd" onclick="openWin('win-cd')">
         <div class="icon-img">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -935,6 +1094,49 @@
       </div>
     </div>
 
+    <!-- ── WIN: VIDEO PLAYER ─────────────────────────────── -->
+    <div class="win" id="win-video">
+      <div class="win-bar" onmousedown="startDrag(event,'win-video')">
+        <span class="win-title">▶ Media Player</span>
+        <div class="win-controls">
+          <button class="win-btn" onclick="minimizeWin('win-video')" title="Minimize">_</button>
+          <button class="win-btn" onclick="closeWin('win-video')" title="Close">×</button>
+        </div>
+      </div>
+      <div class="win-body">
+        <div class="vp-menubar">
+          <span class="vp-menu-item">File</span>
+          <span class="vp-menu-item">View</span>
+          <span class="vp-menu-item">Play</span>
+          <span class="vp-menu-item">Tools</span>
+          <span class="vp-menu-item">Help</span>
+        </div>
+        <div class="vp-screen">
+          <iframe id="vpFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="vp-status" id="vpStatus">Ready</div>
+        <div class="vp-controls">
+          <button class="vp-btn" id="vpPrev" title="Previous">⏮</button>
+          <button class="vp-btn" id="vpPlay" title="Play">▶</button>
+          <button class="vp-btn" id="vpStop" title="Stop">■</button>
+          <button class="vp-btn" id="vpNext" title="Next">⏭</button>
+          <div class="vp-seek">
+            <div class="vp-seek-fill" id="vpSeekFill"></div>
+          </div>
+          <div class="vp-volume">
+            <span class="vp-vol-icon">🔊</span>
+            <div class="vp-vol-bar">
+              <div class="vp-vol-fill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="vp-url-bar">
+          <input type="text" class="vp-url-input" id="vpUrlInput" placeholder="Paste YouTube video or playlist link..." />
+          <button class="vp-url-btn" id="vpLoadBtn">LOAD</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ── WIN: CD PLAYER ──────────────────────────────── -->
     <div class="win" id="win-cd">
       <div class="win-bar" onmousedown="startDrag(event,'win-cd')">
@@ -997,6 +1199,9 @@
       <button class="taskbar-icon" id="tb-win-about" onclick="taskbarClick('win-about')">
         <div class="taskbar-dot"></div>ABOUT
       </button>
+      <button class="taskbar-icon" id="tb-win-video" onclick="taskbarClick('win-video')">
+        <div class="taskbar-dot"></div>VIDEO
+      </button>
       <button class="taskbar-icon" id="tb-win-cd" onclick="taskbarClick('win-cd')">
         <div class="taskbar-dot"></div>CD PLAYER
       </button>
@@ -1018,6 +1223,10 @@
     <div class="menu-item" onclick="openWin('win-about');closeStartMenu()">
       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="12"/><rect x="4" y="4" width="6" height="1.5" fill="currentColor" stroke="none"/><rect x="4" y="7" width="6" height="1.5" fill="currentColor" stroke="none"/><rect x="4" y="10" width="4" height="1.5" fill="currentColor" stroke="none"/></svg>
       ABOUT
+    </div>
+    <div class="menu-item" onclick="openWin('win-video');closeStartMenu()">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="12" height="9"/><polygon points="5,5 5,9 10,7" fill="currentColor" stroke="none"/></svg>
+      VIDEO
     </div>
     <div class="menu-item" onclick="openWin('win-cd');closeStartMenu()">
       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><circle cx="7" cy="7" r="2"/></svg>
@@ -1097,6 +1306,7 @@
           'win-main':    { top: 60,  left: 120 },
           'win-content': { top: 80,  left: 220 },
           'win-about':   { top: 100, left: 460 },
+          'win-video':   { top: 50,  left: 280 },
           'win-cd':      { top: 70,  left: 340 },
         };
         if (positions[id] && !el.style.top) {
@@ -1149,7 +1359,7 @@
     }
 
     function updateTaskbar() {
-      ['win-main','win-content','win-about','win-cd'].forEach(id => {
+      ['win-main','win-content','win-about','win-video','win-cd'].forEach(id => {
         const tb = document.getElementById('tb-' + id);
         if (!tb) return;
         const isOpen = winState[id] === 'open' || winState[id] === 'minimized';
@@ -1397,6 +1607,59 @@
 
     document.getElementById('cdPlaylistInput').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') document.getElementById('cdLoadBtn').click();
+    });
+
+    /* ── VIDEO PLAYER ──────────────────────────────────────── */
+    function parseVideoUrl(url) {
+      var val = url.trim();
+      try {
+        var u = new URL(val);
+        var list = u.searchParams.get('list');
+        var v = u.searchParams.get('v');
+        if (u.hostname === 'youtu.be') {
+          var vid = u.pathname.slice(1);
+          if (list) return { type: 'playlist', id: list };
+          if (vid) return { type: 'video', id: vid };
+        }
+        if (list) return { type: 'playlist', id: list };
+        if (v) return { type: 'video', id: v };
+      } catch(e) {}
+      if (val.length === 11 && val.indexOf(' ') === -1) return { type: 'video', id: val };
+      if (val.length > 11 && val.indexOf(' ') === -1) return { type: 'playlist', id: val };
+      return null;
+    }
+
+    function loadVideo(parsed) {
+      var frame = document.getElementById('vpFrame');
+      var status = document.getElementById('vpStatus');
+      if (parsed.type === 'playlist') {
+        frame.src = 'https://www.youtube.com/embed/videoseries?list=' + parsed.id + '&autoplay=1&rel=0';
+        status.textContent = 'Playing playlist...';
+      } else {
+        frame.src = 'https://www.youtube.com/embed/' + parsed.id + '?autoplay=1&rel=0';
+        status.textContent = 'Playing video...';
+      }
+    }
+
+    document.getElementById('vpLoadBtn').addEventListener('click', function() {
+      var input = document.getElementById('vpUrlInput');
+      var val = input.value.trim();
+      if (!val) return;
+      var parsed = parseVideoUrl(val);
+      if (!parsed) { input.value = 'Invalid link'; return; }
+      loadVideo(parsed);
+      input.value = '';
+      input.placeholder = parsed.type === 'playlist' ? 'Playlist loaded!' : 'Video loaded!';
+      setTimeout(function() { input.placeholder = 'Paste YouTube video or playlist link...'; }, 3000);
+    });
+
+    document.getElementById('vpUrlInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('vpLoadBtn').click();
+    });
+
+    document.getElementById('vpStop').addEventListener('click', function() {
+      document.getElementById('vpFrame').src = '';
+      document.getElementById('vpStatus').textContent = 'Ready';
     });
   </script>
 </body>

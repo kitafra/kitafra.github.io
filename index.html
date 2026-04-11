@@ -474,6 +474,41 @@
       left: -9999px;
       opacity: 0;
     }
+    .cd-playlist-bar {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+    .cd-playlist-input {
+      flex: 1;
+      height: 24px;
+      background: #F0F0E8;
+      border: 2px inset #C0C0C0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #333;
+      padding: 0 6px;
+      outline: none;
+    }
+    .cd-playlist-input::placeholder {
+      color: #999;
+      font-size: 5px;
+    }
+    .cd-load-btn {
+      height: 24px;
+      padding: 0 8px;
+      background: #E8B4F0;
+      border: 2px outset #C0C0C0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #5B2370;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .cd-load-btn:hover { background: #F0CCF8; }
+    .cd-load-btn:active { border-style: inset; }
 
     /* ── PIXEL CURSOR ────────────────────────────────────── */
     #desktop, .icon, .win-bar, .tab, .pill-link, .card, .win-btn, .taskbar-icon {
@@ -890,6 +925,10 @@
         </div>
       </div>
       <div class="win-body">
+        <div class="cd-playlist-bar">
+          <input type="text" class="cd-playlist-input" id="cdPlaylistInput" placeholder="Paste YouTube playlist link..." />
+          <button class="cd-load-btn" id="cdLoadBtn">LOAD</button>
+        </div>
         <div class="cd-layout">
           <div class="cd-art">
             <div class="cd-disc" id="cdDisc"></div>
@@ -1287,6 +1326,36 @@
       if (!ytPlayer || !ytReady) return;
       ytPlayer.nextVideo();
       setTimeout(updateTrackInfo, 1000);
+    });
+
+    // Load custom playlist
+    function parseYouTubeList(url) {
+      try {
+        var u = new URL(url);
+        var list = u.searchParams.get('list');
+        if (list) return list;
+      } catch(e) {}
+      // try raw ID
+      if (url.trim().length > 5 && url.trim().indexOf(' ') === -1) return url.trim();
+      return null;
+    }
+
+    document.getElementById('cdLoadBtn').addEventListener('click', function() {
+      var input = document.getElementById('cdPlaylistInput');
+      var val = input.value.trim();
+      if (!val) return;
+      var listId = parseYouTubeList(val);
+      if (!listId) { input.value = 'Invalid link'; return; }
+      if (!ytPlayer || !ytReady) return;
+      ytPlayer.loadPlaylist({ list: listId, listType: 'playlist' });
+      input.value = '';
+      input.placeholder = 'Playlist loaded!';
+      setTimeout(function() { input.placeholder = 'Paste YouTube playlist link...'; }, 3000);
+      setTimeout(updateTrackInfo, 1500);
+    });
+
+    document.getElementById('cdPlaylistInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('cdLoadBtn').click();
     });
   </script>
 </body>

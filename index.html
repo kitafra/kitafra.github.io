@@ -360,27 +360,20 @@
       position: relative;
       overflow: hidden;
     }
-    .cd-disc {
+    .cd-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: auto;
+      display: block;
+    }
+    .cd-thumb-placeholder {
       width: 80px;
       height: 80px;
       border-radius: 50%;
       border: 3px solid #888;
       background: radial-gradient(circle at 50% 50%, #333 18%, #666 20%, #888 22%, #aaa 40%, #ccc 50%, #aaa 60%, #888 78%, #666 80%, #333 82%);
-      animation: spin 3s linear infinite;
-      animation-play-state: paused;
     }
-    .cd-disc.spinning { animation-play-state: running; }
-    .cd-disc::after {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: #333;
-      border: 2px solid #555;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
     .cd-info {
       flex: 1;
       display: flex;
@@ -931,7 +924,8 @@
         </div>
         <div class="cd-layout">
           <div class="cd-art">
-            <div class="cd-disc" id="cdDisc"></div>
+            <img class="cd-thumb-img" id="cdThumbImg" style="display:none" />
+            <div class="cd-thumb-placeholder" id="cdPlaceholder"></div>
           </div>
           <div class="cd-info">
             <div class="cd-field">
@@ -1242,19 +1236,15 @@
     }
 
     function onPlayerStateChange(event) {
-      var disc = document.getElementById('cdDisc');
       var playBtn = document.getElementById('cdPlay');
       if (event.data === YT.PlayerState.PLAYING) {
-        disc.classList.add('spinning');
         playBtn.textContent = '❚❚';
         updateTrackInfo();
         startSeekUpdate();
       } else if (event.data === YT.PlayerState.PAUSED) {
-        disc.classList.remove('spinning');
         playBtn.textContent = '▶';
         stopSeekUpdate();
       } else if (event.data === YT.PlayerState.ENDED) {
-        disc.classList.remove('spinning');
         playBtn.textContent = '▶';
         stopSeekUpdate();
       }
@@ -1269,8 +1259,17 @@
         var data = ytPlayer.getVideoData();
         var title = data.title || 'Unknown';
         var author = data.author || 'Unknown';
+        var videoId = data.video_id;
         document.getElementById('cdArtist').textContent = author;
         document.getElementById('cdTrack').textContent = title;
+        // Update thumbnail
+        if (videoId) {
+          var img = document.getElementById('cdThumbImg');
+          var placeholder = document.getElementById('cdPlaceholder');
+          img.src = 'https://img.youtube.com/vi/' + videoId + '/mqdefault.jpg';
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        }
       } catch(e) {
         document.getElementById('cdArtist').textContent = 'YouTube Mix';
         document.getElementById('cdTrack').textContent = 'Radio';
@@ -1310,7 +1309,6 @@
     document.getElementById('cdStop').addEventListener('click', function() {
       if (!ytPlayer || !ytReady) return;
       ytPlayer.stopVideo();
-      document.getElementById('cdDisc').classList.remove('spinning');
       document.getElementById('cdPlay').textContent = '▶';
       document.getElementById('cdThumb').style.left = '0%';
       stopSeekUpdate();

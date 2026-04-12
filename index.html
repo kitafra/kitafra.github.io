@@ -782,15 +782,15 @@
         top: auto;
         left: auto;
         flex-direction: row;
-        gap: 12px;
-        overflow-x: auto;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
         padding-bottom: 8px;
         flex-shrink: 0;
-        -webkit-overflow-scrolling: touch;
       }
-      .icon { width: 56px; flex-shrink: 0; }
-      .icon-img { width: 40px; height: 40px; }
-      .icon-img svg { width: 24px; height: 24px; }
+      .icon { width: 48px; flex-shrink: 0; }
+      .icon-img { width: 36px; height: 36px; }
+      .icon-img svg { width: 22px; height: 22px; }
       .icon-label { font-size: 5px; }
 
       /* Windows: stacked, full width, no absolute positioning */
@@ -822,7 +822,13 @@
       .win.mobile-collapsed .vp-status,
       .win.mobile-collapsed .vp-controls,
       .win.mobile-collapsed .vp-url-bar {
-        display: none;
+        display: none !important;
+      }
+      /* Collapsed indicator arrow on title bar */
+      .win.mobile-collapsed .win-title::after {
+        content: ' ▼';
+        font-size: 6px;
+        opacity: 0.5;
       }
 
       /* KITAFRA window */
@@ -878,13 +884,14 @@
         flex-wrap: nowrap;
       }
       .taskbar-icon {
-        font-size: 5px;
-        padding: 0 6px;
-        height: 26px;
+        font-size: 4px;
+        padding: 0 4px;
+        height: 24px;
         flex-shrink: 0;
+        letter-spacing: -0.02em;
       }
-      .taskbar-dot { width: 4px; height: 4px; }
-      #clock { font-size: 6px; padding: 0 8px; }
+      .taskbar-dot { width: 3px; height: 3px; gap: 3px; }
+      #clock { font-size: 5px; padding: 0 6px; }
 
       /* Start menu */
       #start-menu {

@@ -802,8 +802,9 @@
         min-width: 0;
         box-shadow: 3px 3px 0 #000;
         flex-shrink: 0;
+        /* On mobile, ALL windows are always visible in the flow */
+        display: flex !important;
       }
-      .win.open { display: flex; }
 
       /* Title bar: no drag cursor on mobile */
       .win-bar {
@@ -1619,10 +1620,11 @@
               boot.remove();
               // open main window on boot
               openWin('win-main');
-              // On mobile, open all windows stacked
+              // On mobile, collapse all windows except main
               if (window.matchMedia('(max-width: 768px)').matches) {
                 ['win-content','win-about','win-video','win-cd','win-fidget'].forEach(function(wid) {
-                  openWin(wid);
+                  var w = document.getElementById(wid);
+                  if (w) w.classList.add('mobile-collapsed');
                 });
               }
             });
@@ -1670,6 +1672,10 @@
       // On mobile: uncollapse and scroll to the window
       if (isMob) {
         el.classList.remove('mobile-collapsed');
+        // Collapse all other windows for cleaner mobile UX
+        document.querySelectorAll('.win').forEach(function(w) {
+          if (w.id !== id) w.classList.add('mobile-collapsed');
+        });
         setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
       }
       bringToFront(id);
@@ -2071,42 +2077,23 @@
     (function() {
       var isMobile = window.matchMedia('(max-width: 768px)');
 
+      // Tap title bar to collapse/expand on mobile
+      document.querySelectorAll('.win-bar').forEach(function(bar) {
+        bar.addEventListener('click', function(e) {
+          if (!isMobile.matches) return;
+          if (e.target.closest('.win-btn')) return;
+          var win = bar.closest('.win');
+          if (win) win.classList.toggle('mobile-collapsed');
+        });
+      });
+
+      // Disable drag on mobile
       function setupMobile() {
         if (!isMobile.matches) return;
-
-        // Disable drag on mobile
         document.querySelectorAll('.win-bar').forEach(function(bar) {
           bar.removeAttribute('onmousedown');
         });
-
-        // Tap title bar to collapse/expand
-        document.querySelectorAll('.win-bar').forEach(function(bar) {
-          bar.addEventListener('click', function(e) {
-            if (!isMobile.matches) return;
-            if (e.target.closest('.win-btn')) return; // don't collapse on minimize/close
-            var win = bar.closest('.win');
-            if (win) win.classList.toggle('mobile-collapsed');
-          });
-        });
-
-        // On mobile, open all windows stacked on boot
-        // (they're already opened via openWin in boot sequence)
-        // Collapse all except KITAFRA by default
-        setTimeout(function() {
-          if (!isMobile.matches) return;
-          document.querySelectorAll('.win.open').forEach(function(w) {
-            if (w.id !== 'win-main') {
-              w.classList.add('mobile-collapsed');
-            }
-          });
-        }, 3500); // after boot finishes
       }
-
-      // Also open all windows on mobile after boot
-      var origOpenWin = window.openWin;
-      // On mobile, clicking an icon shows the window in the flow
-      // Since all windows are in the DOM flow, just toggle open class
-
       setupMobile();
       isMobile.addEventListener('change', setupMobile);
     })();

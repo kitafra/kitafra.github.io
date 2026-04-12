@@ -756,6 +756,157 @@
       100% { transform: rotateY(360deg) rotateX(0deg); }
     }
 
+    /* ── MOBILE RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      html, body {
+        overflow: auto;
+        height: auto;
+      }
+
+      /* Desktop becomes scrollable column */
+      #desktop {
+        position: relative;
+        inset: auto;
+        min-height: 100vh;
+        overflow: visible;
+        padding: 12px;
+        padding-bottom: 60px; /* room for taskbar */
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* Icons: horizontal scrollable row at top */
+      .desktop-icons {
+        position: relative;
+        top: auto;
+        left: auto;
+        flex-direction: row;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        flex-shrink: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .icon { width: 56px; flex-shrink: 0; }
+      .icon-img { width: 40px; height: 40px; }
+      .icon-img svg { width: 24px; height: 24px; }
+      .icon-label { font-size: 5px; }
+
+      /* Windows: stacked, full width, no absolute positioning */
+      .win {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        min-width: 0;
+        box-shadow: 3px 3px 0 #000;
+        flex-shrink: 0;
+      }
+      .win.open { display: flex; }
+
+      /* Title bar: no drag cursor on mobile */
+      .win-bar {
+        cursor: pointer;
+        height: 32px;
+        padding: 0 8px;
+      }
+      .win-title { font-size: 7px; }
+      .win-btn { width: 20px; height: 20px; font-size: 9px; }
+
+      /* Collapsible body on mobile */
+      .win.mobile-collapsed .win-body,
+      .win.mobile-collapsed .win-tabs,
+      .win.mobile-collapsed .vp-menubar,
+      .win.mobile-collapsed .vp-screen,
+      .win.mobile-collapsed .vp-status,
+      .win.mobile-collapsed .vp-controls,
+      .win.mobile-collapsed .vp-url-bar {
+        display: none;
+      }
+
+      /* KITAFRA window */
+      .brand-logo { font-size: 20px; }
+      .brand-tag { font-size: 6px; }
+      .brand-hero { padding: 14px 0; }
+      .pill-link { padding: 12px 14px; font-size: 7px; }
+
+      /* Content window */
+      .content-row { flex-direction: column; }
+      .card { padding: 10px; }
+      .card-title { font-size: 7px; }
+
+      /* CD Player */
+      #win-cd .win-body { padding: 10px; }
+      .cd-layout { flex-direction: column; align-items: center; gap: 10px; }
+      .cd-art { width: 80px; height: 80px; }
+      .cd-info { width: 100%; }
+      .cd-field-value { font-size: 5px; height: 20px; }
+      .cd-btn { width: 38px; height: 32px; font-size: 9px; }
+      .cd-playlist-input { font-size: 5px; height: 28px; }
+      .cd-load-btn { height: 28px; font-size: 5px; }
+
+      /* Video Player */
+      .vp-menubar { flex-wrap: wrap; }
+      .vp-menu-item { font-size: 5px; padding: 6px 6px; }
+      .vp-btn { width: 32px; height: 32px; }
+      .vp-url-input { font-size: 5px; height: 28px; }
+      .vp-url-btn { height: 28px; font-size: 5px; }
+      .vp-vol-bar { width: 30px; }
+
+      /* Fidget Board */
+      #win-fidget .win-body { padding: 16px; gap: 18px; min-height: 160px; }
+      .fidget-butterfly-btn, .fidget-mystery-btn { width: 56px; height: 56px; }
+      .fb-icon { font-size: 20px; }
+      .fm-icon { font-size: 16px; }
+
+      /* Taskbar */
+      #taskbar {
+        height: 44px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      #start-btn {
+        padding: 0 10px;
+        font-size: 7px;
+        flex-shrink: 0;
+      }
+      #taskbar-wins {
+        gap: 3px;
+        padding: 0 4px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+      .taskbar-icon {
+        font-size: 5px;
+        padding: 0 6px;
+        height: 26px;
+        flex-shrink: 0;
+      }
+      .taskbar-dot { width: 4px; height: 4px; }
+      #clock { font-size: 6px; padding: 0 8px; }
+
+      /* Start menu */
+      #start-menu {
+        width: 180px;
+        bottom: 44px;
+      }
+      .menu-header { font-size: 8px; padding: 8px 10px; }
+      .menu-item { font-size: 6px; padding: 10px 10px; }
+
+      /* Boot screen mobile */
+      .boot-logo { font-size: 22px; }
+      .boot-bar-wrap { width: 160px; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 380px) {
+      .brand-logo { font-size: 16px; }
+      .cd-layout { gap: 8px; }
+      .cd-art { width: 64px; height: 64px; }
+      .fidget-butterfly-btn, .fidget-mystery-btn { width: 48px; height: 48px; }
+    }
+
     /* ── PIXEL CURSOR ────────────────────────────────────── */
     #desktop, .icon, .win-bar, .tab, .pill-link, .card, .win-btn, .taskbar-icon {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 0h2v2H0zM2 2h2v2H2zM4 4h2v2H4zM6 6h2v2H6zM2 4h2v2H2zM4 8h2v2H4zM2 10h2v2H2zM4 12h2v2H4z' fill='%23000'/%3E%3Cpath d='M1 0h1v2H1zM0 0h1v1H0zM3 2h1v2H3zM2 2h1v1H2zM5 4h1v2H5zM4 4h1v1H4zM7 6h1v2H7zM6 6h1v1H6z' fill='%23FFC1CC'/%3E%3C/svg%3E") 0 0, pointer;
@@ -1461,6 +1612,12 @@
               boot.remove();
               // open main window on boot
               openWin('win-main');
+              // On mobile, open all windows stacked
+              if (window.matchMedia('(max-width: 768px)').matches) {
+                ['win-content','win-about','win-video','win-cd','win-fidget'].forEach(function(wid) {
+                  openWin(wid);
+                });
+              }
             });
           }, 400);
         }
@@ -1484,21 +1641,29 @@
     function openWin(id) {
       const el = document.getElementById(id);
       if (!el) return;
+      var isMob = window.matchMedia('(max-width: 768px)').matches;
       if (!el.classList.contains('open')) {
         el.classList.add('open');
-        // default positions
-        const positions = {
-          'win-main':    { top: 60,  left: 120 },
-          'win-content': { top: 80,  left: 220 },
-          'win-about':   { top: 100, left: 460 },
-          'win-video':   { top: 50,  left: 280 },
-          'win-cd':      { top: 70,  left: 340 },
-          'win-fidget':  { top: 90,  left: 400 },
-        };
-        if (positions[id] && !el.style.top) {
-          el.style.top  = positions[id].top  + 'px';
-          el.style.left = positions[id].left + 'px';
+        // default positions (desktop only)
+        if (!isMob) {
+          const positions = {
+            'win-main':    { top: 60,  left: 120 },
+            'win-content': { top: 80,  left: 220 },
+            'win-about':   { top: 100, left: 460 },
+            'win-video':   { top: 50,  left: 280 },
+            'win-cd':      { top: 70,  left: 340 },
+            'win-fidget':  { top: 90,  left: 400 },
+          };
+          if (positions[id] && !el.style.top) {
+            el.style.top  = positions[id].top  + 'px';
+            el.style.left = positions[id].left + 'px';
+          }
         }
+      }
+      // On mobile: uncollapse and scroll to the window
+      if (isMob) {
+        el.classList.remove('mobile-collapsed');
+        setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
       }
       bringToFront(id);
       winState[id] = 'open';
@@ -1894,6 +2059,50 @@
     document.getElementById('butterflyBtn').addEventListener('click', function() {
       spawnHearts(this);
     });
+
+    /* ── MOBILE: TAP TO COLLAPSE/EXPAND ───────────── */
+    (function() {
+      var isMobile = window.matchMedia('(max-width: 768px)');
+
+      function setupMobile() {
+        if (!isMobile.matches) return;
+
+        // Disable drag on mobile
+        document.querySelectorAll('.win-bar').forEach(function(bar) {
+          bar.removeAttribute('onmousedown');
+        });
+
+        // Tap title bar to collapse/expand
+        document.querySelectorAll('.win-bar').forEach(function(bar) {
+          bar.addEventListener('click', function(e) {
+            if (!isMobile.matches) return;
+            if (e.target.closest('.win-btn')) return; // don't collapse on minimize/close
+            var win = bar.closest('.win');
+            if (win) win.classList.toggle('mobile-collapsed');
+          });
+        });
+
+        // On mobile, open all windows stacked on boot
+        // (they're already opened via openWin in boot sequence)
+        // Collapse all except KITAFRA by default
+        setTimeout(function() {
+          if (!isMobile.matches) return;
+          document.querySelectorAll('.win.open').forEach(function(w) {
+            if (w.id !== 'win-main') {
+              w.classList.add('mobile-collapsed');
+            }
+          });
+        }, 3500); // after boot finishes
+      }
+
+      // Also open all windows on mobile after boot
+      var origOpenWin = window.openWin;
+      // On mobile, clicking an icon shows the window in the flow
+      // Since all windows are in the DOM flow, just toggle open class
+
+      setupMobile();
+      isMobile.addEventListener('change', setupMobile);
+    })();
   </script>
 </body>
 </html>

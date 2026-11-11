@@ -108,7 +108,6 @@
       color: #FFC1CC;
       padding: 0 6px;
       height: 26px;
-      cursor: grab;
       flex-shrink: 0;
     }
     .win-bar:active { cursor: grabbing; }
@@ -222,7 +221,7 @@
     #win-content {
       width: 460px;
       top: 80px;
-      left: 200px;
+      left: 220px;
     }
     .content-grid {
       display: flex;
@@ -305,7 +304,7 @@
     #win-about {
       width: 320px;
       top: 100px;
-      left: 560px;
+      left: 460px;
     }
     .about-block {
       margin-bottom: 16px;
@@ -451,13 +450,6 @@
     }
     .cd-btn:hover { background: #000; color: #FFC1CC; }
     .cd-btn:active { background: #000; color: #FFC1CC; }
-    .cd-yt-frame {
-      width: 1px;
-      height: 1px;
-      position: absolute;
-      left: -9999px;
-      opacity: 0;
-    }
     .cd-playlist-bar {
       display: flex;
       gap: 4px;
@@ -757,165 +749,6 @@
       100% { transform: rotateY(360deg) rotateX(0deg); }
     }
 
-    /* ── MOBILE RESPONSIVE ──────────────────────────────── */
-    @media (max-width: 768px) {
-      html, body {
-        overflow: auto;
-        height: auto;
-      }
-
-      /* Desktop becomes scrollable column */
-      #desktop {
-        position: relative;
-        inset: auto;
-        min-height: 100vh;
-        overflow: visible;
-        padding: 12px;
-        padding-bottom: 60px; /* room for taskbar */
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      /* Icons: horizontal scrollable row at top */
-      .desktop-icons {
-        position: relative;
-        top: auto;
-        left: auto;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: center;
-        padding-bottom: 8px;
-        flex-shrink: 0;
-      }
-      .icon { width: 48px; flex-shrink: 0; }
-      .icon-img { width: 36px; height: 36px; }
-      .icon-img svg { width: 22px; height: 22px; }
-      .icon-label { font-size: 5px; }
-
-      /* Windows: stacked, full width, no absolute positioning */
-      .win {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        width: 100% !important;
-        min-width: 0;
-        box-shadow: 3px 3px 0 #000;
-        flex-shrink: 0;
-        /* On mobile, ALL windows are always visible in the flow */
-        display: flex !important;
-      }
-
-      /* Title bar: no drag cursor on mobile */
-      .win-bar {
-        cursor: pointer;
-        height: 32px;
-        padding: 0 8px;
-      }
-      .win-title { font-size: 7px; }
-      .win-btn { width: 20px; height: 20px; font-size: 9px; }
-
-      /* Collapsible body on mobile */
-      .win.mobile-collapsed .win-body,
-      .win.mobile-collapsed .win-tabs,
-      .win.mobile-collapsed .vp-menubar,
-      .win.mobile-collapsed .vp-screen,
-      .win.mobile-collapsed .vp-status,
-      .win.mobile-collapsed .vp-controls,
-      .win.mobile-collapsed .vp-url-bar {
-        display: none !important;
-      }
-      /* Collapsed indicator arrow on title bar */
-      .win.mobile-collapsed .win-title::after {
-        content: ' ▼';
-        font-size: 6px;
-        opacity: 0.5;
-      }
-
-      /* KITAFRA window */
-      .brand-logo { font-size: 20px; }
-      .brand-tag { font-size: 6px; }
-      .brand-hero { padding: 14px 0; }
-      .pill-link { padding: 12px 14px; font-size: 7px; }
-
-      /* Content window */
-      .content-row { flex-direction: column; }
-      .card { padding: 10px; }
-      .card-title { font-size: 7px; }
-
-      /* CD Player */
-      #win-cd .win-body { padding: 10px; }
-      .cd-layout { flex-direction: column; align-items: center; gap: 10px; }
-      .cd-art { width: 80px; height: 80px; }
-      .cd-info { width: 100%; }
-      .cd-field-value { font-size: 5px; height: 20px; }
-      .cd-btn { width: 38px; height: 32px; font-size: 9px; }
-      .cd-playlist-input { font-size: 5px; height: 28px; }
-      .cd-load-btn { height: 28px; font-size: 5px; }
-
-      /* Video Player */
-      .vp-menubar { flex-wrap: wrap; }
-      .vp-menu-item { font-size: 5px; padding: 6px 6px; }
-      .vp-btn { width: 32px; height: 32px; }
-      .vp-url-input { font-size: 5px; height: 28px; }
-      .vp-url-btn { height: 28px; font-size: 5px; }
-      .vp-vol-bar { width: 30px; }
-
-      /* Fidget Board */
-      #win-fidget .win-body { padding: 16px; gap: 18px; min-height: 160px; }
-      .fidget-butterfly-btn, .fidget-mystery-btn { width: 56px; height: 56px; }
-      .fb-icon { font-size: 20px; }
-      .fm-icon { font-size: 16px; }
-
-      /* Taskbar */
-      #taskbar {
-        height: 44px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      #start-btn {
-        padding: 0 10px;
-        font-size: 7px;
-        flex-shrink: 0;
-      }
-      #taskbar-wins {
-        gap: 3px;
-        padding: 0 4px;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-      }
-      .taskbar-icon {
-        font-size: 4px;
-        padding: 0 4px;
-        height: 24px;
-        flex-shrink: 0;
-        letter-spacing: -0.02em;
-      }
-      .taskbar-dot { width: 3px; height: 3px; gap: 3px; }
-      #clock { font-size: 5px; padding: 0 6px; }
-
-      /* Start menu */
-      #start-menu {
-        width: 180px;
-        bottom: 44px;
-      }
-      .menu-header { font-size: 8px; padding: 8px 10px; }
-      .menu-item { font-size: 6px; padding: 10px 10px; }
-
-      /* Boot screen mobile */
-      .boot-logo { font-size: 22px; }
-      .boot-bar-wrap { width: 160px; }
-    }
-
-    /* Extra small phones */
-    @media (max-width: 380px) {
-      .brand-logo { font-size: 16px; }
-      .cd-layout { gap: 8px; }
-      .cd-art { width: 64px; height: 64px; }
-      .fidget-butterfly-btn, .fidget-mystery-btn { width: 48px; height: 48px; }
-    }
-
     /* ── PIXEL CURSOR ────────────────────────────────────── */
     #desktop, .icon, .win-bar, .tab, .pill-link, .card, .win-btn, .taskbar-icon {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 0h2v2H0zM2 2h2v2H2zM4 4h2v2H4zM6 6h2v2H6zM2 4h2v2H2zM4 8h2v2H4zM2 10h2v2H2zM4 12h2v2H4z' fill='%23000'/%3E%3Cpath d='M1 0h1v2H1zM0 0h1v1H0zM3 2h1v2H3zM2 2h1v1H2zM5 4h1v2H5zM4 4h1v1H4zM7 6h1v2H7zM6 6h1v1H6z' fill='%23FFC1CC'/%3E%3C/svg%3E") 0 0, pointer;
@@ -1091,6 +924,168 @@
       color: #FFC1CC;
       letter-spacing: 0.1em;
       opacity: 0.6;
+    }
+
+    /* ── MOBILE RESPONSIVE ──────────────────────────────── */
+    /* Phone rules go last so they override the base rules above. */
+    @media (max-width: 768px) {
+      html, body {
+        overflow: auto;
+        height: auto;
+      }
+
+      /* Desktop becomes scrollable column */
+      #desktop {
+        position: relative;
+        inset: auto;
+        min-height: 100vh;
+        overflow: visible;
+        padding: 12px;
+        padding-bottom: 60px; /* room for taskbar */
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* Icons: horizontal scrollable row at top */
+      .desktop-icons {
+        position: relative;
+        top: auto;
+        left: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        padding-bottom: 8px;
+        flex-shrink: 0;
+      }
+      .icon { width: 48px; flex-shrink: 0; }
+      .icon-img { width: 36px; height: 36px; }
+      .icon-img svg { width: 22px; height: 22px; }
+      .icon-label { font-size: 5px; }
+
+      /* Windows: stacked, full width, no absolute positioning */
+      .win {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        min-width: 0;
+        box-shadow: 3px 3px 0 #000;
+        flex-shrink: 0;
+        /* On mobile, ALL windows are always visible in the flow */
+        display: flex !important;
+      }
+
+      /* Title bar: no drag cursor on mobile */
+      .win-bar {
+        cursor: pointer;
+        height: 32px;
+        padding: 0 8px;
+      }
+      .win-title { font-size: 7px; }
+      .win-btn { width: 20px; height: 20px; font-size: 9px; }
+
+      /* Collapsible body on mobile */
+      .win.mobile-collapsed .win-body,
+      .win.mobile-collapsed .win-tabs,
+      .win.mobile-collapsed .vp-menubar,
+      .win.mobile-collapsed .vp-screen,
+      .win.mobile-collapsed .vp-status,
+      .win.mobile-collapsed .vp-controls,
+      .win.mobile-collapsed .vp-url-bar {
+        display: none !important;
+      }
+      /* Collapsed indicator arrow on title bar */
+      .win.mobile-collapsed .win-title::after {
+        content: ' ▼';
+        font-size: 6px;
+        opacity: 0.5;
+      }
+
+      /* KITAFRA window */
+      .brand-logo { font-size: 20px; }
+      .brand-tag { font-size: 6px; }
+      .brand-hero { padding: 14px 0; }
+      .pill-link { padding: 12px 14px; font-size: 7px; }
+
+      /* Content window */
+      .content-row { flex-direction: column; }
+      .card { padding: 10px; }
+      .card-title { font-size: 7px; }
+
+      /* CD Player */
+      #win-cd .win-body { padding: 10px; }
+      .cd-layout { flex-direction: column; align-items: center; gap: 10px; }
+      .cd-art { width: 80px; height: 80px; }
+      .cd-info { width: 100%; }
+      .cd-field-value { font-size: 5px; height: 20px; }
+      .cd-btn { width: 38px; height: 32px; font-size: 9px; }
+      .cd-playlist-input { font-size: 5px; height: 28px; }
+      .cd-load-btn { height: 28px; font-size: 5px; }
+
+      /* Video Player */
+      .vp-menubar { flex-wrap: wrap; }
+      .vp-menu-item { font-size: 5px; padding: 6px 6px; }
+      .vp-btn { width: 32px; height: 32px; }
+      .vp-url-input { font-size: 5px; height: 28px; }
+      .vp-url-btn { height: 28px; font-size: 5px; }
+      .vp-vol-bar { width: 30px; }
+
+      /* Fidget Board */
+      #win-fidget .win-body { padding: 16px; gap: 18px; min-height: 160px; }
+      .fidget-butterfly-btn, .fidget-mystery-btn { width: 56px; height: 56px; }
+      .fb-icon { font-size: 20px; }
+      .fm-icon { font-size: 16px; }
+
+      /* Taskbar */
+      #taskbar {
+        height: 44px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      #start-btn {
+        padding: 0 10px;
+        font-size: 7px;
+        flex-shrink: 0;
+      }
+      #taskbar-wins {
+        gap: 3px;
+        padding: 0 4px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none; /* swipe sideways to reach the last buttons */
+      }
+      #taskbar-wins::-webkit-scrollbar { display: none; }
+      .taskbar-icon {
+        font-size: 4px;
+        padding: 0 4px;
+        height: 24px;
+        flex-shrink: 0;
+        letter-spacing: -0.02em;
+      }
+      .taskbar-dot { width: 3px; height: 3px; gap: 3px; }
+      #clock { font-size: 5px; padding: 0 6px; }
+
+      /* Start menu */
+      #start-menu {
+        width: 180px;
+        bottom: 44px;
+      }
+      .menu-header { font-size: 8px; padding: 8px 10px; }
+      .menu-item { font-size: 6px; padding: 10px 10px; }
+
+      /* Boot screen mobile */
+      .boot-logo { font-size: 22px; }
+      .boot-bar-wrap { width: 160px; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 380px) {
+      .brand-logo { font-size: 16px; }
+      .cd-layout { gap: 8px; }
+      .cd-art { width: 64px; height: 64px; }
+      .fidget-butterfly-btn, .fidget-mystery-btn { width: 48px; height: 48px; }
     }
   </style>
 </head>
@@ -1422,7 +1417,8 @@
           <span class="vp-menu-item">Help</span>
         </div>
         <div class="vp-screen">
-          <iframe id="vpFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <!-- The YouTube player is created here when a link is loaded -->
+          <div id="vpFrame"></div>
         </div>
         <div class="vp-status" id="vpStatus">Ready</div>
         <div class="vp-controls">
@@ -1619,15 +1615,8 @@
             boot.classList.add('fade');
             boot.addEventListener('animationend', () => {
               boot.remove();
-              // open main window on boot
+              // open main window on boot (on mobile this also collapses the others)
               openWin('win-main');
-              // On mobile, collapse all windows except main
-              if (window.matchMedia('(max-width: 768px)').matches) {
-                ['win-content','win-about','win-video','win-cd','win-fidget'].forEach(function(wid) {
-                  var w = document.getElementById(wid);
-                  if (w) w.classList.add('mobile-collapsed');
-                });
-              }
             });
           }, 400);
         }
@@ -1647,31 +1636,17 @@
     /* ── WINDOW MANAGEMENT ─────────────────────────────── */
     let zTop = 10;
     const winState = {}; // { id: 'open'|'minimized'|'closed' }
+    const WIN_IDS = Array.from(document.querySelectorAll('.win')).map(w => w.id);
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    function isMobile() { return mobileQuery.matches; }
 
+    // Default desktop positions live in the CSS (#win-main, #win-content, ...)
     function openWin(id) {
       const el = document.getElementById(id);
       if (!el) return;
-      var isMob = window.matchMedia('(max-width: 768px)').matches;
-      if (!el.classList.contains('open')) {
-        el.classList.add('open');
-        // default positions (desktop only)
-        if (!isMob) {
-          const positions = {
-            'win-main':    { top: 60,  left: 120 },
-            'win-content': { top: 80,  left: 220 },
-            'win-about':   { top: 100, left: 460 },
-            'win-video':   { top: 50,  left: 280 },
-            'win-cd':      { top: 70,  left: 340 },
-            'win-fidget':  { top: 90,  left: 400 },
-          };
-          if (positions[id] && !el.style.top) {
-            el.style.top  = positions[id].top  + 'px';
-            el.style.left = positions[id].left + 'px';
-          }
-        }
-      }
+      el.classList.add('open');
       // On mobile: uncollapse and scroll to the window
-      if (isMob) {
+      if (isMobile()) {
         el.classList.remove('mobile-collapsed');
         // Collapse all other windows for cleaner mobile UX
         document.querySelectorAll('.win').forEach(function(w) {
@@ -1684,20 +1659,26 @@
       updateTaskbar();
     }
 
-    function closeWin(id) {
+    // Hide a window. On mobile every window stays in the page, so it
+    // collapses to its title bar instead.
+    function hideWin(id, state) {
       const el = document.getElementById(id);
       if (!el) return;
       el.classList.remove('open','active');
-      winState[id] = 'closed';
+      if (isMobile()) el.classList.add('mobile-collapsed');
+      winState[id] = state;
       updateTaskbar();
     }
 
+    function closeWin(id) {
+      hideWin(id, 'closed');
+      // A closed player should not keep playing out of sight
+      if (id === 'win-cd') stopCd();
+      if (id === 'win-video') stopVideoPlayer();
+    }
+
     function minimizeWin(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.classList.remove('open','active');
-      winState[id] = 'minimized';
-      updateTaskbar();
+      hideWin(id, 'minimized');
     }
 
     function bringToFront(id) {
@@ -1724,10 +1705,9 @@
     }
 
     function updateTaskbar() {
-      ['win-main','win-content','win-about','win-video','win-cd','win-fidget'].forEach(id => {
+      WIN_IDS.forEach(id => {
         const tb = document.getElementById('tb-' + id);
         if (!tb) return;
-        const isOpen = winState[id] === 'open' || winState[id] === 'minimized';
         // show minimized in taskbar as open
         const el = document.getElementById(id);
         const isVisible = el && el.classList.contains('open');
@@ -1755,6 +1735,7 @@
     let dragging = null, ox = 0, oy = 0;
 
     function startDrag(e, id) {
+      if (isMobile()) return; // windows are stacked on mobile, not draggable
       if (e.target.closest('.win-btn')) return;
       dragging = document.getElementById(id);
       bringToFront(id);
@@ -1908,13 +1889,15 @@
       }
     });
 
-    document.getElementById('cdStop').addEventListener('click', function() {
+    function stopCd() {
       if (!ytPlayer || !ytReady) return;
       ytPlayer.stopVideo();
       document.getElementById('cdPlay').textContent = '▶';
       document.getElementById('cdThumb').style.left = '0%';
       stopSeekUpdate();
-    });
+    }
+
+    document.getElementById('cdStop').addEventListener('click', stopCd);
 
     document.getElementById('cdPrev').addEventListener('click', function() {
       if (!ytPlayer || !ytReady) return;
@@ -1928,45 +1911,65 @@
       setTimeout(updateTrackInfo, 1000);
     });
 
-    // Parse YouTube URL — handles single videos and playlists
-    function parseYouTubeInput(url) {
-      var val = url.trim();
-      try {
-        var u = new URL(val);
-        var list = u.searchParams.get('list');
-        var v = u.searchParams.get('v');
-        // youtu.be short links
-        if (u.hostname === 'youtu.be') {
-          var vid = u.pathname.slice(1);
-          if (list) return { type: 'playlist', id: list };
-          if (vid) return { type: 'video', id: vid };
-        }
+    // Parse a YouTube link or raw ID — used by both the CD Player and the
+    // Video Player. Handles watch, youtu.be, Shorts, live, embed and playlist
+    // links. Returns null for anything that is not YouTube.
+    var YT_VIDEO_ID = /^[\w-]{11}$/;
+    var YT_LIST_ID = /^(PL|UU|FL|RD|OL)[\w-]{8,}$/;
+    var YT_HOSTS = ['youtube.com', 'youtube-nocookie.com', 'youtu.be'];
+
+    function parseYouTubeLink(input) {
+      var val = input.trim();
+      var u = null;
+      try { u = new URL(val); } catch(e) {}
+      // Links pasted without the https:// part
+      if (!u && /^(www\.|m\.|music\.)?(youtube\.com|youtu\.be)\//i.test(val)) {
+        try { u = new URL('https://' + val); } catch(e) {}
+      }
+      if (u) {
+        var host = u.hostname.toLowerCase().replace(/^(www|m|music)\./, '');
+        if (YT_HOSTS.indexOf(host) === -1) return null;
         // Playlist link takes priority if present
-        if (list) return { type: 'playlist', id: list };
+        var list = u.searchParams.get('list');
+        if (list && /^[\w-]+$/.test(list)) return { type: 'playlist', id: list };
         // Single video
-        if (v) return { type: 'video', id: v };
-      } catch(e) {}
-      // Raw ID fallback (11 chars = video, longer = playlist)
-      if (val.length === 11 && val.indexOf(' ') === -1) return { type: 'video', id: val };
-      if (val.length > 11 && val.indexOf(' ') === -1) return { type: 'playlist', id: val };
+        var vid;
+        if (host === 'youtu.be') {
+          vid = u.pathname.split('/')[1];
+        } else {
+          var m = u.pathname.match(/^\/(?:shorts|embed|live|v)\/([\w-]+)/);
+          vid = m ? m[1] : u.searchParams.get('v');
+        }
+        return vid && YT_VIDEO_ID.test(vid) ? { type: 'video', id: vid } : null;
+      }
+      // Raw ID fallback
+      if (YT_VIDEO_ID.test(val)) return { type: 'video', id: val };
+      if (YT_LIST_ID.test(val)) return { type: 'playlist', id: val };
       return null;
+    }
+
+    // Show a short message in a link box, then put its hint text back
+    function flashPlaceholder(input, message) {
+      if (!input.dataset.hint) input.dataset.hint = input.placeholder;
+      input.value = '';
+      input.placeholder = message;
+      clearTimeout(input._hintTimer);
+      input._hintTimer = setTimeout(function() { input.placeholder = input.dataset.hint; }, 3000);
     }
 
     document.getElementById('cdLoadBtn').addEventListener('click', function() {
       var input = document.getElementById('cdPlaylistInput');
       var val = input.value.trim();
       if (!val) return;
-      var parsed = parseYouTubeInput(val);
-      if (!parsed) { input.value = 'Invalid link'; return; }
+      var parsed = parseYouTubeLink(val);
+      if (!parsed) { flashPlaceholder(input, 'Not a YouTube link'); return; }
       if (!ytPlayer || !ytReady) return;
       if (parsed.type === 'playlist') {
         ytPlayer.loadPlaylist({ list: parsed.id, listType: 'playlist' });
       } else {
         ytPlayer.loadVideoById(parsed.id);
       }
-      input.value = '';
-      input.placeholder = parsed.type === 'playlist' ? 'Playlist loaded!' : 'Video loaded!';
-      setTimeout(function() { input.placeholder = 'Paste YouTube link or playlist...'; }, 3000);
+      flashPlaceholder(input, parsed.type === 'playlist' ? 'Playlist loaded!' : 'Video loaded!');
       setTimeout(updateTrackInfo, 1500);
     });
 
@@ -1975,57 +1978,142 @@
     });
 
     /* ── VIDEO PLAYER ──────────────────────────────────────── */
-    function parseVideoUrl(url) {
-      var val = url.trim();
-      try {
-        var u = new URL(val);
-        var list = u.searchParams.get('list');
-        var v = u.searchParams.get('v');
-        if (u.hostname === 'youtu.be') {
-          var vid = u.pathname.slice(1);
-          if (list) return { type: 'playlist', id: list };
-          if (vid) return { type: 'video', id: vid };
-        }
-        if (list) return { type: 'playlist', id: list };
-        if (v) return { type: 'video', id: v };
-      } catch(e) {}
-      if (val.length === 11 && val.indexOf(' ') === -1) return { type: 'video', id: val };
-      if (val.length > 11 && val.indexOf(' ') === -1) return { type: 'playlist', id: val };
-      return null;
+    // Uses the same YouTube IFrame API as the CD Player, so the play,
+    // previous and next buttons and the seek bar can control the video.
+    var vpPlayer = null;
+    var vpReady = false;
+    var vpKind = 'video';
+    var vpSeekInterval = null;
+
+    function setVpStatus(text) {
+      document.getElementById('vpStatus').textContent = text;
+    }
+
+    function stopVpSeek() {
+      if (vpSeekInterval) { clearInterval(vpSeekInterval); vpSeekInterval = null; }
+    }
+    function startVpSeek() {
+      stopVpSeek();
+      vpSeekInterval = setInterval(function() {
+        if (!vpPlayer || !vpReady) return;
+        try {
+          var dur = vpPlayer.getDuration();
+          if (dur > 0) {
+            var pct = Math.min(100, (vpPlayer.getCurrentTime() / dur) * 100);
+            document.getElementById('vpSeekFill').style.width = pct + '%';
+          }
+        } catch(e) {}
+      }, 500);
+    }
+
+    // Remove the current video and put the empty screen back
+    function resetVideoPlayer() {
+      stopVpSeek();
+      if (vpPlayer) {
+        try { vpPlayer.destroy(); } catch(e) {}
+        vpPlayer = null;
+      }
+      vpReady = false;
+      var screen = document.querySelector('.vp-screen');
+      screen.textContent = '';
+      var holder = document.createElement('div');
+      holder.id = 'vpFrame';
+      screen.appendChild(holder);
+      document.getElementById('vpSeekFill').style.width = '0%';
+      document.getElementById('vpPlay').textContent = '▶';
+    }
+
+    function stopVideoPlayer() {
+      resetVideoPlayer();
+      setVpStatus('Ready');
+    }
+
+    function onVpStateChange(event) {
+      var playBtn = document.getElementById('vpPlay');
+      if (event.data === YT.PlayerState.PLAYING) {
+        playBtn.textContent = '❚❚';
+        setVpStatus(vpKind === 'playlist' ? 'Playing playlist...' : 'Playing video...');
+        startVpSeek();
+      } else if (event.data === YT.PlayerState.PAUSED) {
+        playBtn.textContent = '▶';
+        setVpStatus('Paused');
+        stopVpSeek();
+      } else if (event.data === YT.PlayerState.ENDED) {
+        playBtn.textContent = '▶';
+        setVpStatus('Finished');
+        stopVpSeek();
+      }
     }
 
     function loadVideo(parsed) {
-      var frame = document.getElementById('vpFrame');
-      var status = document.getElementById('vpStatus');
-      if (parsed.type === 'playlist') {
-        frame.src = 'https://www.youtube.com/embed/videoseries?list=' + parsed.id + '&autoplay=1&rel=0';
-        status.textContent = 'Playing playlist...';
-      } else {
-        frame.src = 'https://www.youtube.com/embed/' + parsed.id + '?autoplay=1&rel=0';
-        status.textContent = 'Playing video...';
+      if (!window.YT || !YT.Player) {
+        setVpStatus('YouTube is still loading. Try again.');
+        return false;
       }
+      resetVideoPlayer();
+      vpKind = parsed.type;
+      var options = {
+        width: '100%',
+        height: '100%',
+        playerVars: { autoplay: 1, rel: 0 },
+        events: {
+          'onReady': function() { vpReady = true; },
+          'onStateChange': onVpStateChange,
+          'onError': function() {
+            stopVpSeek();
+            document.getElementById('vpPlay').textContent = '▶';
+            setVpStatus('This video cannot be played here');
+          }
+        }
+      };
+      if (parsed.type === 'playlist') {
+        options.playerVars.listType = 'playlist';
+        options.playerVars.list = parsed.id;
+      } else {
+        options.videoId = parsed.id;
+      }
+      setVpStatus('Loading...');
+      vpPlayer = new YT.Player('vpFrame', options);
+      return true;
     }
 
     document.getElementById('vpLoadBtn').addEventListener('click', function() {
       var input = document.getElementById('vpUrlInput');
       var val = input.value.trim();
       if (!val) return;
-      var parsed = parseVideoUrl(val);
-      if (!parsed) { input.value = 'Invalid link'; return; }
-      loadVideo(parsed);
-      input.value = '';
-      input.placeholder = parsed.type === 'playlist' ? 'Playlist loaded!' : 'Video loaded!';
-      setTimeout(function() { input.placeholder = 'Paste YouTube video or playlist link...'; }, 3000);
+      var parsed = parseYouTubeLink(val);
+      if (!parsed) { flashPlaceholder(input, 'Not a YouTube link'); return; }
+      if (!loadVideo(parsed)) return;
+      flashPlaceholder(input, parsed.type === 'playlist' ? 'Playlist loaded!' : 'Video loaded!');
     });
 
     document.getElementById('vpUrlInput').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') document.getElementById('vpLoadBtn').click();
     });
 
-    document.getElementById('vpStop').addEventListener('click', function() {
-      document.getElementById('vpFrame').src = '';
-      document.getElementById('vpStatus').textContent = 'Ready';
+    document.getElementById('vpPlay').addEventListener('click', function() {
+      if (!vpPlayer || !vpReady) {
+        // Nothing loaded yet: point at the link box
+        setVpStatus('Paste a YouTube link below, then LOAD');
+        document.getElementById('vpUrlInput').focus();
+        return;
+      }
+      if (vpPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+        vpPlayer.pauseVideo();
+      } else {
+        vpPlayer.playVideo();
+      }
     });
+
+    // Previous / next only do something when a playlist is loaded
+    document.getElementById('vpPrev').addEventListener('click', function() {
+      if (vpPlayer && vpReady) vpPlayer.previousVideo();
+    });
+    document.getElementById('vpNext').addEventListener('click', function() {
+      if (vpPlayer && vpReady) vpPlayer.nextVideo();
+    });
+
+    document.getElementById('vpStop').addEventListener('click', stopVideoPlayer);
 
     /* ── FIDGET BOARD: HEART BURST ─────────────────────── */
     function spawnHearts(originEl) {
@@ -2076,27 +2164,16 @@
 
     /* ── MOBILE: TAP TO COLLAPSE/EXPAND ───────────── */
     (function() {
-      var isMobile = window.matchMedia('(max-width: 768px)');
-
       // Tap title bar to collapse/expand on mobile
+      // (dragging is switched off for mobile inside startDrag)
       document.querySelectorAll('.win-bar').forEach(function(bar) {
         bar.addEventListener('click', function(e) {
-          if (!isMobile.matches) return;
+          if (!isMobile()) return;
           if (e.target.closest('.win-btn')) return;
           var win = bar.closest('.win');
           if (win) win.classList.toggle('mobile-collapsed');
         });
       });
-
-      // Disable drag on mobile
-      function setupMobile() {
-        if (!isMobile.matches) return;
-        document.querySelectorAll('.win-bar').forEach(function(bar) {
-          bar.removeAttribute('onmousedown');
-        });
-      }
-      setupMobile();
-      isMobile.addEventListener('change', setupMobile);
     })();
   </script>
 </body>
